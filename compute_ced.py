@@ -103,8 +103,9 @@ def count_ced_auc(errors):
 def main():
     parser = argparse.ArgumentParser(description='CED computation script', add_help=True)
     parser.add_argument('--gt_path', nargs="+", type=str, help='', default=["data/landmarks_task/300W/test"])
-    parser.add_argument('--predictions_path', nargs="+", type=str, help='', default=["results/test"])
+    parser.add_argument('--predictions_path', nargs="+", type=str, help='', default=["results/300W"])
     parser.add_argument('--output_path', action='store', type=str, help='', default="results/ced.png")
+    parser.add_argument('--name', type=str, help='', default="trained on 300W + Menpo")
     parser.add_argument('--left_eye_idx', action='store', type=str, help='')
     parser.add_argument('--right_eye_idx', action='store', type=str, help='')
     parser.add_argument('--normalization_type', action='store', type=str, help='', default='bbox', choices=['bbox', 'eyes'])
@@ -124,8 +125,12 @@ def main():
     ceds = count_ced(predicted_points, gt_points, args)
 
     # saving figure
-    line_styles = [':', '-.', '--', '-']
-    plt.figure(figsize=(30, 20), dpi=100)
+    line_styles = [':', '-.', '--']
+    line_colors = ["red", "green", "blue"]
+    plt.figure(figsize=(15, 10), dpi=100)
+    plt.title(f"CED curve ({args.name})")
+    plt.xlabel("Error threshold")
+    plt.ylabel("CED")
     for method_idx, method_name in enumerate(ceds.keys()):
         print('Plotting graph for the method {}'.format(method_name))
         err = ceds[method_name]
@@ -143,6 +148,7 @@ def main():
             label=method_name + ', auc={:1.3f}'.format(cur_auc),
             linestyle=line_styles[method_idx % len(line_styles)],
             linewidth=2.0,
+            color=line_colors[method_idx % len(line_colors)]
         )
     plt.legend(loc='right', prop={'size': 24})
     plt.savefig(args.output_path)
