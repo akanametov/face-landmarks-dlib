@@ -91,3 +91,23 @@ python compute_ced.py \
     --predictions_path results/300W results/Menpo results/300W_Menpo \
     --output_path results/ced.png
 ```
+<a><img src="results/ced.png" align="center" height="400px" width="500px"/></a>
+
+## Inference
+
+Download trained models by running:
+
+```
+bash scripts/download_models.sh
+```
+or use your own trained model.
+
+To visualize results on example images run:
+
+```
+python inference.py \
+    --model_path output/shape_predictor_68_300W_Menpo.dat \
+    --data_root examples \
+    --save_dir examples/300W_Menpo
+```
+<a><img src="examples/300W_Menpo/2008_002506.jpg" align="center" height="400px" width="500px"/></a>
