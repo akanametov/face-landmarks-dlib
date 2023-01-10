@@ -130,7 +130,7 @@ def main():
     plt.figure(figsize=(15, 10), dpi=100)
     plt.title(f"CED curve ({args.name})")
     plt.xlabel("Error threshold")
-    plt.ylabel("CED")
+    plt.ylabel("NME")
     for method_idx, method_name in enumerate(ceds.keys()):
         print('Plotting graph for the method {}'.format(method_name))
         err = ceds[method_name]
