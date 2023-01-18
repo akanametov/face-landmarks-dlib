@@ -93,6 +93,8 @@ python compute_ced.py \
 ```
 <a><img src="results/ced.png" align="center" height="400px" width="500px"/></a>
 
+<a><img src="results/ced_dlib.png" align="center" height="400px" width="500px"/></a>
+
 ## Inference
 
 Download trained models by running:
